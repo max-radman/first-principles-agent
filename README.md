@@ -32,8 +32,6 @@ Only the layers with no provider and no library get built custom. Everything els
 
 Every answer is backed by the actual docs and the actual code, cited by `file:line`. No link, no claim. "There's no library for this" is allowed, but only after it has looked, and it says where.
 
-**The rule was never "use more libraries."** It is: don't hand-build what a provider you already pay for already ships. Custom code is what survives the check, not what you reach for first.
-
 ## Use it
 
 Download [`first-principles-agent.md`](./first-principles-agent.md) and hand it to your coding agent (Claude Code, Cursor, Codex, or any chat) with this prompt:
