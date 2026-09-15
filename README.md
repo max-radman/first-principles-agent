@@ -53,4 +53,4 @@ It reads the skill, explains it back, and proposes how to wire it into your work
 
 ## Credit
 
-Built by [Max Radman](https://github.com/max-radman), out of a conversation with Armin Daryiabegi (CTO, chatarmin). The principle he drilled in: use what comes out of the box, build custom only on top, and only when it is really necessary. Most of what you are solving has already been solved by people who worked on it far longer than you.
+Built by [Max Radman](https://github.com/max-radman). Inspired by a conversation with [Armin Daryabegi](https://github.com/saasjesus) (CTO, chatarmin): use what comes out of the box, build custom only on top, and only when it is really necessary. Most of what you're trying to solve has already been solved by people smarter than you who have worked on it for far longer.
