@@ -1,6 +1,6 @@
 ---
 name: first-principles-agent
-description: Run before building a feature or fixing a bug. Maps the layers the change touches, then checks each layer for an existing external provider or library before any custom code is allowed. Catches the most common coding-agent failure: hand-building what a library already ships.
+description: "Run before building a feature or fixing a bug. Maps the layers the change touches, then checks each layer for an existing external provider or library before any custom code is allowed. Catches the most common coding-agent failure, hand-building what a library already ships."
 ---
 
 # First-Principles Agent
