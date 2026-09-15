@@ -1,21 +1,42 @@
 # First-Principles Agent
 
-A skill for your coding agent. It runs **before** any code gets written and stops the agent from hand-building what your libraries already ship out of the box.
+A skill for your coding agent. It runs before any code gets written and stops the agent from hand-building what your libraries already ship out of the box.
 
 Coding agents build custom code by default, because building is what they do. So they constantly re-implement things the libraries you already use ship for free. 5x the work, 0.5x the quality.
 
+## Before / after
+
+You ask for streaming AI chat. Your agent hand-rolls a parser for the server-sent events, a state machine for the message list, and a retry loop.
+
+With the first-principles agent:
+
+```
+Layer: LLM transport → provider already installed: Vercel AI SDK
+useChat() does all three. Docs: sdk.vercel.ai/docs/ai-sdk-ui/chatbot
+Delete the custom parser.
+```
+
+Same story with auth, uploads, date pickers, form validation. The library shipped it. You just rebuilt it.
+
 ## How it works
 
-1. **Map the layers.** It lists every layer the feature or bug actually touches (UI, client state, data fetching, auth, database, jobs, LLM calls, storage...). That's the scope.
-2. **Go layer by layer, one question each: are we already using an external provider for this?**
-   - **Yes** → read the provider's docs and check we're using it their way, not hand-building around it. Doc link required.
-   - **No** → is there a library that does this, so we don't build it from scratch? If there genuinely isn't one, it says so, and that's when custom is justified.
-3. **Only what's left gets built custom.** Every claim is backed by the actual docs and the actual code, cited by `file:line`.
+Before writing code, it maps the layers your change touches (UI, data fetching, auth, database, LLM calls, storage, and so on). Then it walks each layer and asks one question:
+
+```
+Are we already using a provider for this layer?
+  Yes → read its docs. Are we using it their way, or hand-building around it?
+  No  → is there a library that does this? If not, custom is justified.
+```
+
+Only the layers with no provider and no library get built custom. Everything else is "use the provider correctly" or "adopt this library."
+
+Every answer is backed by the actual docs and the actual code, cited by `file:line`. No link, no claim. "There's no library for this" is allowed, but only after it has looked, and it says where.
+
+**The rule was never "use more libraries."** It is: don't hand-build what a provider you already pay for already ships. Custom code is what survives the check, not what you reach for first.
 
 ## Use it
 
-1. Download [`first-principles-agent.md`](./first-principles-agent.md).
-2. Hand it to your coding agent (Claude Code, Cursor, Codex, or any chat) with this prompt:
+Download [`first-principles-agent.md`](./first-principles-agent.md) and hand it to your coding agent (Claude Code, Cursor, Codex, or any chat) with this prompt:
 
 ```
 I'm adding a skill to my coding workflow. Attached is a Markdown file, first-principles-agent.md.
@@ -28,8 +49,8 @@ I'm adding a skill to my coding workflow. Attached is a Markdown file, first-pri
    approval before writing anything.
 ```
 
-The agent reads the skill, explains it back to you, and proposes how to wire it into your workflow before touching anything.
+It reads the skill, explains it back, and proposes how to wire it into your workflow before touching a thing.
 
 ## Credit
 
-Built by [Max Radman](https://github.com/max-radman), from a conversation with Armin Daryiabegi (CTO, chatarmin). Core principle: use what comes out of the box, build custom only on top, and only when it's really necessary.
+Built by [Max Radman](https://github.com/max-radman), out of a conversation with Armin Daryiabegi (CTO, chatarmin). The principle he drilled in: use what comes out of the box, build custom only on top, and only when it is really necessary. Most of what you are solving has already been solved by people who worked on it far longer than you.
